@@ -45,6 +45,7 @@ public class ServletMenu extends HttpServlet {
             //Si la cookie nombreUsuario está activa, se redirige a la página que se busca
             if (cookieActiva) {
                 if (request.getParameter("op").equals("1")) {
+                    response.sendRedirect("/todosContactos.jsp");
                 } else if (request.getParameter("op").equals("2")) {
                 } else if (request.getParameter("op").equals("3")) {
                 } else if (request.getParameter("op").equals("4")) {
@@ -53,8 +54,22 @@ public class ServletMenu extends HttpServlet {
                 }
                 //Si la cookie nombreUsuario no está activa, se redirige al formulario de login
             } else {
-                RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-                rd.forward(request, response);
+                //Comprobamos si se está recibiendo el nombre de usuario desde login
+                if (request.getParameter("op").equals("0")) {
+                    //Si la operación es 0, se reciben los datos desde login
+                    String nombreUsuario = request.getParameter("nombreUsuario");
+                    //Se crea la cookie con el valor recogido del formulario
+                    Cookie cookie = new Cookie("nombreUsuario", nombreUsuario);
+                    //Se le indica un máximo de duración y se añade a response
+                    cookie.setMaxAge(7*24*60*60);
+                    response.addCookie(cookie);
+                    //Se vuelve al índice
+                    RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
+                } else {
+                    RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+                    rd.forward(request, response);
+                }
             }
         } finally {
             out.close();

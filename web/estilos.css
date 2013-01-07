@@ -1,0 +1,27 @@
+/* 
+    Document   : estilos
+    Created on : 05-ene-2013, 20:49:11
+    Author     : Ramón Lence
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.titulo
+{
+    text-align: center;
+    color: green;
+}
+.formulario
+{
+    margin-left: 30px;
+}
+.resultado
+{
+    text-align: center;
+    color: red;
+}
+.enlaceVolver
+{
+    text-align: center;
+}
+
