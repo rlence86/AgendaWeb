@@ -9,9 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Agenda</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Bienvenido a la aplicación Agenda</h1>
+        <ul>
+            <li>Ver todos los contactos</li>
+            <li>Buscar un contacto</li>
+            <li>Añadir contacto nuevo</li>
+            <li>Eliminar contacto</li>
+            <li>Modificar contacto</li>
+        </ul>
     </body>
 </html>
