@@ -14,11 +14,11 @@
     <body>
         <h1>Bienvenido a la aplicación Agenda</h1>
         <ul>
-            <li>Ver todos los contactos</li>
-            <li>Buscar un contacto</li>
-            <li>Añadir contacto nuevo</li>
-            <li>Eliminar contacto</li>
-            <li>Modificar contacto</li>
+            <li><a href="/ServletMenu?op=1">Ver todos los contactos</a></li>
+            <li><a href="/ServletMenu?op=2">Buscar un contacto</a></li>
+            <li><a href="/ServletMenu?op=3">Añadir contacto nuevo</a></li>
+            <li><a href="/ServletMenu?op=4">Eliminar contacto</a></li>
+            <li><a href="/ServletMenu?op=5">Modificar contacto</a></li>
         </ul>
     </body>
 </html>
