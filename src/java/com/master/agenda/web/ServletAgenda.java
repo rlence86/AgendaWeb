@@ -9,6 +9,7 @@ import com.master.agenda.logica.Contacto;
 import com.master.agenda.utils.ConstantesAgenda;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,12 +61,32 @@ public class ServletAgenda extends HttpServlet {
                     rd.forward(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO)) {
                     //Mostrar formulario de búsqueda de usuario
+                    RequestDispatcher rd = request.getRequestDispatcher("/formularioBusqueda.jsp");
+                    rd.forward(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO)) {
                     //Añadir contacto nuevo
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO)) {
                     //Eliminar contacto
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO)) {
                     //Modificar contacto
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_BUSCAR_CON_NOMBRE)) {
+                    //Buscar con el nombre de usuario
+                    //Obtener el nombre de contacto a mostrar
+                    String nombreContacto = request.getParameter("nombreContacto");
+                    //Buscar contacto por nombre
+                    List<Contacto> contactos = new ArrayList<Contacto>();
+                    if(!nombreContacto.equals("")){
+                        contactos.add(ContactoDAO.getInstance().buscarContacto(nombreContacto));
+                    } else {
+                        //Si está vacío, se devuelve al formulario
+                        RequestDispatcher rd = request.getRequestDispatcher("/formularioBusqueda.jsp");
+                        rd.forward(request, response);
+                    }                    
+                    //Añadir resultado a request
+                    request.setAttribute(ConstantesAgenda.ATRIBUTO_CONTACTOS, contactos);
+                    //Redirigir petición para mostrar los contactos
+                    RequestDispatcher rd = request.getRequestDispatcher("/verContactos.jsp");
+                    rd.forward(request, response);
                 } else {
                     //Otra operación (error)
                 }

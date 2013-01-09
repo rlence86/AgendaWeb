@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ver contactos</title>
     </head>
     <body>
         <h1>Contactos encontrados</h1>

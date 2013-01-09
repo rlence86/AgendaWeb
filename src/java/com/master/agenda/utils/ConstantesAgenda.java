@@ -10,6 +10,7 @@ public class ConstantesAgenda {
     public final static String OPERACION_ANADIR_CONTACTO_NUEVO = "3";
     public final static String OPERACION_ELIMINAR_CONTACTO = "4";
     public final static String OPERACION_MODIFICAR_CONTACTO = "5";
+    public final static String OPERACION_BUSCAR_CON_NOMBRE = "6";
     
     public final static String ATRIBUTO_CONTACTOS = "contactos";
 }
