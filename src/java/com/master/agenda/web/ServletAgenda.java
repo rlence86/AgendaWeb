@@ -4,6 +4,7 @@
  */
 package com.master.agenda.web;
 
+import com.master.agenda.utils.ConstantesAgenda;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ramón Lence <rlence86@gmail.com>
  */
-public class ServletMenu extends HttpServlet {
+public class ServletAgenda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -44,13 +45,22 @@ public class ServletMenu extends HttpServlet {
             }
             //Si la cookie nombreUsuario está activa, se redirige a la página que se busca
             if (cookieActiva) {
-                if (request.getParameter("op").equals("1")) {
-                    response.sendRedirect("/todosContactos.jsp");
-                } else if (request.getParameter("op").equals("2")) {
-                } else if (request.getParameter("op").equals("3")) {
-                } else if (request.getParameter("op").equals("4")) {
-                } else if (request.getParameter("op").equals("5")) {
+                if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS)) {
+                    //Ver todos los contactos
+                    //Buscar todos los contactos
+                    //Añadir todos los contactos al request
+                    //Redirigir petición para mostrar los contactos
+                    response.sendRedirect("/verContactos.jsp");
+                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO)) {
+                    //Buscar un contacto
+                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO)) {
+                    //Añadir contacto nuevo
+                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO)) {
+                    //Eliminar contacto
+                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO)) {
+                    //Modificar contacto
                 } else {
+                    //Otra operación (error)
                 }
                 //Si la cookie nombreUsuario no está activa, se redirige al formulario de login
             } else {
