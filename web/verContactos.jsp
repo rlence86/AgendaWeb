@@ -31,6 +31,7 @@
             </tr>
             <% for(Contacto con:contactos) {
                 if(con instanceof Amigo){ %>
+                <tr>
                     <td><%= con.getNombre() %></td>
                     <td><%= con.getEmail() %></td>
                     <td><%= con.getTelefono() %></td>
@@ -38,7 +39,9 @@
                     <td></td>
                     <td></td>
                     <td>Amigo</td>
+                </tr>
             <%  } else if(con instanceof Profesional) { %>
+                <tr>
                     <td><%= con.getNombre() %></td>
                     <td><%= con.getEmail() %></td>
                     <td><%= con.getTelefono() %></td>
@@ -46,12 +49,9 @@
                     <td><%= ((Profesional)con).getDireccion() %></td>
                     <td><%= ((Profesional)con).getEmpresa() %></td>
                     <td>Profesional</td>
+                </tr>
             <%  }
-            }
-                
-    
-    
-    %>
+            }%>
         </table>
     </body>
 </html>

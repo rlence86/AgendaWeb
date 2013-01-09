@@ -15,11 +15,11 @@
     <body>
         <h1>Bienvenido a la aplicación Agenda</h1>
         <ul>
-            <li><a href="/servlet?op=<%= ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS %>">Ver todos los contactos</a></li>
-            <li><a href="/servlet?op=<%= ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO %>">Buscar un contacto</a></li>
-            <li><a href="/servlet?op=<%= ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO %>">Añadir contacto nuevo</a></li>
-            <li><a href="/servlet?op=<%= ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO %>">Eliminar contacto</a></li>
-            <li><a href="/servlet?op=<%= ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO %>">Modificar contacto</a></li>
+            <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS %>">Ver todos los contactos</a></li>
+            <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO %>">Buscar un contacto</a></li>
+            <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO %>">Añadir contacto nuevo</a></li>
+            <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO %>">Eliminar contacto</a></li>
+            <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO %>">Modificar contacto</a></li>
         </ul>
     </body>
 </html>
