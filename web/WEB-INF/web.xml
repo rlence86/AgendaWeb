@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
-        <servlet-name>ServletMenu</servlet-name>
+        <servlet-name>ServletAgenda</servlet-name>
         <servlet-class>com.master.agenda.web.ServletAgenda</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ServletMenu</servlet-name>
-        <url-pattern>/ServletMenu</url-pattern>
+        <servlet-name>ServletAgenda</servlet-name>
+        <url-pattern>/servlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

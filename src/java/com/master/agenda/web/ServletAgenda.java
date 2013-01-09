@@ -4,9 +4,12 @@
  */
 package com.master.agenda.web;
 
+import com.master.agenda.data.ContactoDAO;
 import com.master.agenda.utils.ConstantesAgenda;
+import com.ramonlence.agenda.logica.Contacto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -44,20 +47,24 @@ public class ServletAgenda extends HttpServlet {
                 }
             }
             //Si la cookie nombreUsuario está activa, se redirige a la página que se busca
+            String operacionSeleccionada = request.getParameter("op");
             if (cookieActiva) {
-                if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS)) {
+                if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS)) {
                     //Ver todos los contactos
                     //Buscar todos los contactos
+                    List<Contacto> contactos = ContactoDAO.getInstance().consultarTodos();
                     //Añadir todos los contactos al request
+                    request.setAttribute(ConstantesAgenda.ATRIBUTO_CONTACTOS, contactos);
                     //Redirigir petición para mostrar los contactos
-                    response.sendRedirect("/verContactos.jsp");
-                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO)) {
-                    //Buscar un contacto
-                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO)) {
+                    RequestDispatcher rd = request.getRequestDispatcher("/verContactos.jsp");
+                    rd.forward(request, response);
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO)) {
+                    //Mostrar formulario de búsqueda de usuario
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO)) {
                     //Añadir contacto nuevo
-                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO)) {
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO)) {
                     //Eliminar contacto
-                } else if (request.getParameter("op").equals(ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO)) {
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO)) {
                     //Modificar contacto
                 } else {
                     //Otra operación (error)
@@ -65,13 +72,14 @@ public class ServletAgenda extends HttpServlet {
                 //Si la cookie nombreUsuario no está activa, se redirige al formulario de login
             } else {
                 //Comprobamos si se está recibiendo el nombre de usuario desde login
-                if (request.getParameter("op").equals("0")) {
+                if (operacionSeleccionada.equals("0")) {
                     //Si la operación es 0, se reciben los datos desde login
                     String nombreUsuario = request.getParameter("nombreUsuario");
                     //Se crea la cookie con el valor recogido del formulario
                     Cookie cookie = new Cookie("nombreUsuario", nombreUsuario);
                     //Se le indica un máximo de duración y se añade a response
-                    cookie.setMaxAge(7*24*60*60);
+                    int unaSemana = 7*24*60*60;
+                    cookie.setMaxAge(unaSemana);
                     response.addCookie(cookie);
                     //Se vuelve al índice
                     RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
