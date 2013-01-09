@@ -46,15 +46,28 @@ public class ServletAgenda extends HttpServlet {
                 if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS)) {
                     verTodosContactos(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO)) {
+                    //Se marca el objetivo como búsqueda
+                    request.setAttribute("objetivo", "busqueda");
+                    //Se muestra el formulario
                     mostrarFormularioBusqueda(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO)) {
                     //Añadir contacto nuevo
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO)) {
-                    //Eliminar contacto
+                    //Se marca el objetivo como búsqueda
+                    request.setAttribute("objetivo", "eliminar");
+                    //Se muestra el formulario
+                    mostrarFormularioBusqueda(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO)) {
-                    //Modificar contacto
+                    //Se marca el objetivo como búsqueda
+                    request.setAttribute("objetivo", "modificar");
+                    //Se muestra el formulario
+                    mostrarFormularioBusqueda(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_BUSCAR_CON_NOMBRE)) {
                     buscarUnContacto(request, response);
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ELIMINAR_CON_NOMBRE)) {
+                    eliminarUnContacto(request, response);
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CON_NOMBRE)) {
+                    mostrarFormularioModificar(request, response);
                 } else {
                     //Otra operación (error)
                 }
@@ -141,6 +154,8 @@ public class ServletAgenda extends HttpServlet {
         if(!nombreContacto.equals("")){
             contactos.add(ContactoDAO.getInstance().buscarContacto(nombreContacto));
         } else {
+            //Se marca el objetivo como búsqueda
+            request.setAttribute("objetivo", "busqueda");
             mostrarFormularioBusqueda(request, response);
         }                    
         //Añadir resultado a request
@@ -174,5 +189,43 @@ public class ServletAgenda extends HttpServlet {
         //Se vuelve al índice
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
+    }
+
+    private void eliminarUnContacto(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //Buscar con el nombre de usuario
+        //Obtener el nombre de contacto a mostrar
+        String nombreContacto = request.getParameter("nombreContacto");
+        if(!nombreContacto.equals("")){
+            ContactoDAO.getInstance().borrarContacto(nombreContacto);
+        } else {
+            //Se marca el objetivo como eliminar
+            request.setAttribute("objetivo", "eliminar");
+            mostrarFormularioBusqueda(request, response);
+        }
+        //Redirigir petición para mostrar los contactos
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
+    }
+
+    private void mostrarFormularioModificar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //Buscar con el nombre de usuario
+        //Obtener el nombre de contacto a mostrar
+        String nombreContacto = request.getParameter("nombreContacto");
+        Contacto con = null;
+        if(!nombreContacto.equals("")){
+            con = ContactoDAO.getInstance().buscarContacto(nombreContacto);
+        } else {
+            //Se marca el objetivo como eliminar
+            request.setAttribute("objetivo", "modificar");
+            mostrarFormularioBusqueda(request, response);
+        }
+        if(con!= null){
+            request.setAttribute("contacto", con);
+            //Redirigir petición para mostrar el formulario de modificación
+            RequestDispatcher rd = request.getRequestDispatcher("/formularioModificacion.jsp");
+            rd.forward(request, response);
+        } else {
+            System.out.println("no hay contacto con ese nombre");
+        }
     }
 }
