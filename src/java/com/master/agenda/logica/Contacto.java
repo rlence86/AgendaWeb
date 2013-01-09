@@ -1,4 +1,4 @@
-package com.ramonlence.agenda.logica;
+package com.master.agenda.logica;
 
 public abstract class Contacto {
     private String nombre;

@@ -5,8 +5,8 @@
 package com.master.agenda.web;
 
 import com.master.agenda.data.ContactoDAO;
+import com.master.agenda.logica.Contacto;
 import com.master.agenda.utils.ConstantesAgenda;
-import com.ramonlence.agenda.logica.Contacto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

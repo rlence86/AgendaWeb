@@ -1,4 +1,4 @@
-package com.ramonlence.agenda.logica;
+package com.master.agenda.logica;
 
 import java.util.Calendar;
 

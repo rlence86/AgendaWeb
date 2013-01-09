@@ -4,9 +4,9 @@
  */
 package com.master.agenda.data;
 
-import com.ramonlence.agenda.logica.Amigo;
-import com.ramonlence.agenda.logica.Contacto;
-import com.ramonlence.agenda.logica.Profesional;
+import com.master.agenda.logica.Amigo;
+import com.master.agenda.logica.Contacto;
+import com.master.agenda.logica.Profesional;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;

@@ -4,11 +4,11 @@
     Author     : Ramón Lence <rlence86@gmail.com>
 --%>
 
-<%@page import="com.ramonlence.agenda.logica.Profesional"%>
-<%@page import="com.ramonlence.agenda.logica.Amigo"%>
+<%@page import="com.master.agenda.logica.Profesional"%>
+<%@page import="com.master.agenda.logica.Amigo"%>
 <%@page import="com.master.agenda.utils.ConstantesAgenda"%>
 <%@page import="java.util.List"%>
-<%@page import="com.ramonlence.agenda.logica.Contacto"%>
+<%@page import="com.master.agenda.logica.Contacto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% List<Contacto> contactos = (List<Contacto>)request.getAttribute(ConstantesAgenda.ATRIBUTO_CONTACTOS); %>
 <!DOCTYPE html>
