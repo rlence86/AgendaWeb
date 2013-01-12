@@ -28,13 +28,13 @@
     </head>
     <body>
         <h1>Modificar contacto</h1>
-        <h2><%= request.getParameter("errorFormulario") %></h2>
         <form name="miFormulario" action="servlet" method="post" onsubmit="return validateForm()">
             <label for="telefono">Telefono:</label>
             <input type="text" value="<%= contacto.getTelefono()%>" name="telefonoText" id="telefono" /><br>
             <label for="email">Correo electrónico:</label>
             <input type="text" value="<%= contacto.getEmail()%>" name="emailText" id="email" />
             <input type="hidden" name="op" value ="<%= ConstantesAgenda.OPERACION_MODIFICAR_CON_DATOS%>" />
+            <input type="hidden" name="nombreContacto" value ="<%= contacto.getNombre() %>" />
             <input type="submit" value="Modificar" />
         </form>
     </body>
