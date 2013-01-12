@@ -68,6 +68,8 @@ public class ServletAgenda extends HttpServlet {
                     eliminarUnContacto(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CON_NOMBRE)) {
                     mostrarFormularioModificar(request, response);
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CON_DATOS)) {
+                    modificarUnContacto(request,response);
                 } else {
                     //Otra operación (error)
                 }
@@ -227,5 +229,27 @@ public class ServletAgenda extends HttpServlet {
         } else {
             System.out.println("no hay contacto con ese nombre");
         }
+    }
+
+    private void modificarUnContacto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Buscar con el nombre de usuario
+        //Obtener el nombre de contacto a mostrar
+        String nombreContacto = request.getParameter("nombreContacto");
+        //Obtener el nuevo número de teléfono
+        String telefono = request.getParameter("telefonoText");
+        Long numeroTelefono = Long.parseLong(telefono);
+        //Obtener el nuevo mail
+        String email = request.getParameter("emailText");
+        if(!nombreContacto.equals("")){
+            ContactoDAO.getInstance().modificarEmail(nombreContacto, email);
+            ContactoDAO.getInstance().modificarTelefono(nombreContacto, numeroTelefono);
+        } else {
+            //Se marca el objetivo como eliminar
+            request.setAttribute("objetivo", "eliminar");
+            mostrarFormularioBusqueda(request, response);
+        }
+        //Redirigir petición para mostrar los contactos
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 }
