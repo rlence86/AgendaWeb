@@ -51,7 +51,7 @@ public class ServletAgenda extends HttpServlet {
                     //Se muestra el formulario
                     mostrarFormularioBusqueda(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ANADIR_CONTACTO_NUEVO)) {
-                    //Añadir contacto nuevo
+                    mostrarFormularioContactoNuevo(request,response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ELIMINAR_CONTACTO)) {
                     //Se marca el objetivo como búsqueda
                     request.setAttribute("objetivo", "eliminar");
@@ -250,6 +250,12 @@ public class ServletAgenda extends HttpServlet {
         }
         //Redirigir petición para mostrar los contactos
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
+    }
+
+    private void mostrarFormularioContactoNuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Mostrar formulario de búsqueda de usuario
+        RequestDispatcher rd = request.getRequestDispatcher("/formularioContactoNuevo.jsp");
         rd.forward(request, response);
     }
 }
