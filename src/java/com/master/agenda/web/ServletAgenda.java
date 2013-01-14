@@ -5,11 +5,13 @@
 package com.master.agenda.web;
 
 import com.master.agenda.data.ContactoDAO;
+import com.master.agenda.logica.Amigo;
 import com.master.agenda.logica.Contacto;
 import com.master.agenda.utils.ConstantesAgenda;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -264,13 +266,22 @@ public class ServletAgenda extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void anadirNuevoAmigo(HttpServletRequest request, HttpServletResponse response) {
+    private void anadirNuevoAmigo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreContacto = request.getParameter("nombreContacto");
         String correoElectronico = request.getParameter("correoElectronico");
         String telefonoText = request.getParameter("textoTelefono");
-        String cumple = request.getParameter("fechaCumple");
-        
+        Integer diaCumple = Integer.parseInt(request.getParameter("diaCumple"));
+        Integer mesCumple = Integer.parseInt(request.getParameter("mesCumple"));
+        Calendar cumple = Calendar.getInstance();
+        cumple.set(1990, mesCumple -1, diaCumple);        
         Long telefono = Long.parseLong(telefonoText);
+        
+        Amigo nuevoAmigo = new Amigo(nombreContacto, correoElectronico, telefono, cumple);
+        ContactoDAO.getInstance().insertarContacto(nuevoAmigo);
+        
+        //Mostrar página de inicio
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 
     private void anadirNuevoProfesional(HttpServletRequest request, HttpServletResponse response) {

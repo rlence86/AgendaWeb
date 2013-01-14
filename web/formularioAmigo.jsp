@@ -36,7 +36,7 @@
         <option value="30">30</option>
         <option value="31">31</option>        
     </select>
-    <select>
+    <select name="mesCumple">
         <option value="1">Enero</option>
         <option value="2">Febrero</option>
         <option value="3">Marzo</option>
