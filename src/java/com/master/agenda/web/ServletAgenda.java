@@ -7,6 +7,7 @@ package com.master.agenda.web;
 import com.master.agenda.data.ContactoDAO;
 import com.master.agenda.logica.Amigo;
 import com.master.agenda.logica.Contacto;
+import com.master.agenda.logica.Profesional;
 import com.master.agenda.utils.ConstantesAgenda;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -284,7 +285,19 @@ public class ServletAgenda extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void anadirNuevoProfesional(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    private void anadirNuevoProfesional(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nombreContacto = request.getParameter("nombreContacto");
+        String correoElectronico = request.getParameter("correoElectronico");
+        String telefonoText = request.getParameter("textoTelefono");
+        String direccion = request.getParameter("direccion");
+        String empresa = request.getParameter("empresa");     
+        Long telefono = Long.parseLong(telefonoText);
+        
+        Profesional nuevoProfesional = new Profesional(nombreContacto, correoElectronico, telefono, direccion, empresa);
+        ContactoDAO.getInstance().insertarContacto(nuevoProfesional);
+        
+        //Mostrar página de inicio
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 }
