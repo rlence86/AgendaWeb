@@ -10,6 +10,7 @@ import com.master.agenda.utils.ConstantesAgenda;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -70,6 +71,10 @@ public class ServletAgenda extends HttpServlet {
                     mostrarFormularioModificar(request, response);
                 } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_MODIFICAR_CON_DATOS)) {
                     modificarUnContacto(request,response);
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ANADIR_AMIGO)) {
+                    anadirNuevoAmigo(request,response);
+                } else if (operacionSeleccionada.equals(ConstantesAgenda.OPERACION_ANADIR_PROFESIONAL)) {
+                    anadirNuevoProfesional(request,response);
                 } else {
                     //Otra operación (error)
                 }
@@ -257,5 +262,18 @@ public class ServletAgenda extends HttpServlet {
         //Mostrar formulario de búsqueda de usuario
         RequestDispatcher rd = request.getRequestDispatcher("/formularioContactoNuevo.jsp");
         rd.forward(request, response);
+    }
+
+    private void anadirNuevoAmigo(HttpServletRequest request, HttpServletResponse response) {
+        String nombreContacto = request.getParameter("nombreContacto");
+        String correoElectronico = request.getParameter("correoElectronico");
+        String telefonoText = request.getParameter("textoTelefono");
+        String cumple = request.getParameter("fechaCumple");
+        
+        Long telefono = Long.parseLong(telefonoText);
+    }
+
+    private void anadirNuevoProfesional(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

@@ -15,6 +15,8 @@ public class ConstantesAgenda {
     public final static String OPERACION_ELIMINAR_CON_NOMBRE = "7";
     public final static String OPERACION_MODIFICAR_CON_NOMBRE = "8";
     public final static String OPERACION_MODIFICAR_CON_DATOS = "9";
+    public final static String OPERACION_ANADIR_AMIGO = "10";
+    public final static String OPERACION_ANADIR_PROFESIONAL = "11";
     
     public final static String ATRIBUTO_CONTACTOS = "contactos";
 }
