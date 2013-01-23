@@ -207,6 +207,7 @@ public class ServletAgenda extends HttpServlet {
         String nombreContacto = request.getParameter("nombreContacto");
         if(!nombreContacto.equals("")){
             ContactoDAO.getInstance().borrarContacto(nombreContacto);
+            request.setAttribute("exito", "Contacto eliminado correctamente");
         } else {
             //Se marca el objetivo como eliminar
             request.setAttribute("objetivo", "eliminar");
@@ -274,11 +275,18 @@ public class ServletAgenda extends HttpServlet {
         Integer diaCumple = Integer.parseInt(request.getParameter("diaCumple"));
         Integer mesCumple = Integer.parseInt(request.getParameter("mesCumple"));
         Calendar cumple = Calendar.getInstance();
-        cumple.set(1990, mesCumple -1, diaCumple);        
-        Long telefono = Long.parseLong(telefonoText);
-        
-        Amigo nuevoAmigo = new Amigo(nombreContacto, correoElectronico, telefono, cumple);
-        ContactoDAO.getInstance().insertarContacto(nuevoAmigo);
+        cumple.set(1990, mesCumple -1, diaCumple);
+        if(comprobarCorreccionAmigo(request, nombreContacto, correoElectronico, telefonoText, diaCumple, mesCumple)){
+            try{    
+                Long telefono = Long.parseLong(telefonoText);        
+                Amigo nuevoAmigo = new Amigo(nombreContacto, correoElectronico, telefono, cumple);
+                ContactoDAO.getInstance().insertarContacto(nuevoAmigo);
+                request.setAttribute("exito", "Contacto añadido correctamente");
+            } catch (NumberFormatException ex) {
+                request.setAttribute("error", "El teléfono debe ser un número");
+            }
+        }
+       
         
         //Mostrar página de inicio
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
@@ -329,6 +337,41 @@ public class ServletAgenda extends HttpServlet {
     
     private boolean mailCorrecto(String emailAddr) {
         return emailAddr.contains(" ") == false && emailAddr.matches(".+@.+\\.[a-z]+");
+    }
+    
+    private boolean comprobarCorreccionAmigo(HttpServletRequest request, String nombreContacto, String correoElectronico, String telefonoText, Integer diaCumple, Integer mesCumple) {
+        if (nombreContacto.length() == 0) {
+            request.setAttribute("error", "El campo nombre debe rellenarse");
+            return false;
+        } else if (!mailCorrecto(correoElectronico)) {
+            request.setAttribute("error", "El mail no es correcto");
+            return false;
+        } else if (telefonoText.length() == 0) {
+            request.setAttribute("error", "El teléfono debe rellenarse");
+            return false;
+        } else if (!fechaCorrecta(mesCumple, diaCumple)) {
+            request.setAttribute("error", "La fecha no es correcta");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean fechaCorrecta(int indexMes, int indexDia) {
+        //comprobamos los dias segun el mes
+        if (indexMes == 2) {
+            //si es febrero, no puede tener mas de 29 dias
+            if (indexDia >= 29) {
+                //si es el dia 30 o posterior, la fecha es incorrecta
+                return false;
+            }
+        } else if ((4 == indexMes) | (6 == indexMes) | (9 == indexMes) | (11 == indexMes)) {
+            //Es un mes de 30 días
+            if (indexDia >= 30) {
+                //si es el dia 31 o posterior, la fecha es incorrecta
+                return false;
+            }
+        }
+        return true;
     }
     
 }
