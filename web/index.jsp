@@ -14,6 +14,11 @@
     </head>
     <body>
         <h1>Bienvenido a la aplicación Agenda</h1>
+        <% if (request.getAttribute("error")!=null) {%>
+        <h2><%= request.getAttribute("error") %></h2>
+        <% } else if (request.getAttribute("exito")!=null) { %>
+        <h2><%= request.getAttribute("exito") %></h2>
+        <% } %>
         <ul>
             <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_VER_TODOS_CONTACTOS %>">Ver todos los contactos</a></li>
             <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_BUSCAR_UN_CONTACTO %>">Buscar un contacto</a></li>

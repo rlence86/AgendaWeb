@@ -296,8 +296,9 @@ public class ServletAgenda extends HttpServlet {
                 Long telefono = Long.parseLong(telefonoText);        
                 Profesional nuevoProfesional = new Profesional(nombreContacto, correoElectronico, telefono, direccion, empresa);
                 ContactoDAO.getInstance().insertarContacto(nuevoProfesional);
+                request.setAttribute("exito", "Contacto añadido correctamente");
             } catch (NumberFormatException ex) {
-
+                request.setAttribute("error", "El teléfono debe ser un número");
             }
         }
         
