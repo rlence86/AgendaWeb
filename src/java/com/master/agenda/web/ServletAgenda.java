@@ -290,14 +290,44 @@ public class ServletAgenda extends HttpServlet {
         String correoElectronico = request.getParameter("correoElectronico");
         String telefonoText = request.getParameter("textoTelefono");
         String direccion = request.getParameter("direccion");
-        String empresa = request.getParameter("empresa");     
-        Long telefono = Long.parseLong(telefonoText);
-        
-        Profesional nuevoProfesional = new Profesional(nombreContacto, correoElectronico, telefono, direccion, empresa);
-        ContactoDAO.getInstance().insertarContacto(nuevoProfesional);
+        String empresa = request.getParameter("empresa");
+        if(comprobarCorreccionProfesional(request, nombreContacto, correoElectronico, telefonoText, direccion, empresa)){
+            try {
+                Long telefono = Long.parseLong(telefonoText);        
+                Profesional nuevoProfesional = new Profesional(nombreContacto, correoElectronico, telefono, direccion, empresa);
+                ContactoDAO.getInstance().insertarContacto(nuevoProfesional);
+            } catch (NumberFormatException ex) {
+
+            }
+        }
         
         //Mostrar página de inicio
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
+    
+    private boolean comprobarCorreccionProfesional(HttpServletRequest request, String nombre, String email, String telefono, String direccion, String empresa) {
+        if (nombre.length() == 0) {
+            request.setAttribute("error", "El campo nombre debe rellenarse");
+            return false;
+        } else if (!mailCorrecto(email)) {
+            request.setAttribute("error", "El mail no es correcto");
+            return false;
+        } else if (telefono.length() == 0) {
+            request.setAttribute("error", "El teléfono debe rellenarse");
+            return false;
+        } else if (direccion.length() == 0) {
+            request.setAttribute("error", "La dirección debe rellenarse");
+            return false;
+        } else if (empresa.length() == 0) {
+            request.setAttribute("error", "La empresa debe rellenarse");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean mailCorrecto(String emailAddr) {
+        return emailAddr.contains(" ") == false && emailAddr.matches(".+@.+\\.[a-z]+");
+    }
+    
 }
