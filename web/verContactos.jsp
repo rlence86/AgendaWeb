@@ -15,10 +15,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="estilos.css" rel="stylesheet" type="text/css">
         <title>Ver contactos</title>
     </head>
     <body>
+        <div class="titulo">
         <h1>Contactos encontrados</h1>
+        </div>
+        <div class="menu">
         <table border="1">
             <tr>
                 <th>Nombre</th>
@@ -53,5 +57,6 @@
             <%  }
             }%>
         </table>
+        </div>
     </body>
 </html>
