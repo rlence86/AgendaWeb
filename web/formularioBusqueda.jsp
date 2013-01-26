@@ -26,15 +26,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="estilos.css" rel="stylesheet" type="text/css">
         <title><%= titulo %></title>
     </head>
     <body>
+        <div class="titulo">
         <h1><%= titulo %></h1>
+        </div>
+        <div class="menu">
         <form action="servlet" method="post">
             <label for="nombreContacto">Nombre: </label>
             <input type="text" name="nombreContacto" id="nombreContacto" />
             <input type="hidden" name="op" value ="<%= objetivo %>" />
             <input type="submit" value="<%= nombreBoton %>" />
         </form>
+        </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

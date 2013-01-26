@@ -5,6 +5,10 @@
     Description:
         Purpose of the stylesheet follows.
 */
+body{
+    background-image: url('./images/agenda.png');
+    background-repeat: no-repeat;
+}
 
 .error {
     text-align: center;
@@ -14,7 +18,7 @@
     text-align: center;
     color:green;
 }
-.menu {
+.menu, #containerFormulario, .footer {
     font-family: sans-serif;
     font-size: 17pt;
     text-align: center;

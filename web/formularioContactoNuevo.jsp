@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="estilos.css" rel="stylesheet" type="text/css">
         <title>Nuevo contacto</title>
         <script type="text/javascript">
             var xhr;
@@ -56,7 +57,10 @@
         </script>
     </head>
     <body>
+        <div class="titulo">
         <h1>Crear nuevo contacto</h1>
+        </div>
+        <div class="menu">
         <form name="seleccion">
             <select name="tipo" onchange="cambiaCombo();">
                 <option value="0" selected></option>
@@ -64,7 +68,9 @@
                 <option value="2">Profesional</option>
             </select>
         </form>
+        </div>
         <div id="containerFormulario"><h3>Selecciona un tipo de contacto</h3>
         </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

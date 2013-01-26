@@ -33,5 +33,6 @@
             <li><a href="servlet?op=<%= ConstantesAgenda.OPERACION_MODIFICAR_CONTACTO %>">Modificar contacto</a></li>
         </ul>
         </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

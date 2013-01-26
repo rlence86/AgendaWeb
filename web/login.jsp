@@ -13,11 +13,16 @@
         <title>Login Page</title>
     </head>
     <body>
-        <h1 class="titulo">Introduce tu nombre</h1>
+        <div class="titulo">
+        <h1>Introduce tu nombre</h1>
+        </div>
+        <div class="menu">
         <form action="servlet" method="post">
             <input type="text" name="nombreUsuario" />
             <input type="hidden" name="op" value="0" />
             <input type="submit" value="Enviar" />
         </form>
+        </div>
     </body>
+    <jsp:include page="footer.jsp" />
 </html>

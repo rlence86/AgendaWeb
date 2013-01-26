@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="estilos.css" rel="stylesheet" type="text/css">
         <title>Modificar contacto</title>
         <script type="text/javascript">
             function validateForm(){
@@ -27,7 +28,10 @@
         </script>
     </head>
     <body>
+        <div class="titulo">
         <h1>Modificar contacto</h1>
+        </div>
+        <div class="menu">
         <form name="miFormulario" action="servlet" method="post" onsubmit="return validateForm()">
             <label for="telefono">Telefono:</label>
             <input type="text" value="<%= contacto.getTelefono()%>" name="telefonoText" id="telefono" /><br>
@@ -37,5 +41,7 @@
             <input type="hidden" name="nombreContacto" value ="<%= contacto.getNombre() %>" />
             <input type="submit" value="Modificar" />
         </form>
+        </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>
